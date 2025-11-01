@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: visibleer-tanitim
+    env: static
+    staticPublishPath: .
+    buildCommand: ""
+    routes:
+      - type: rewrite
+        source: /(.+)
+        destination: /index.html
+
