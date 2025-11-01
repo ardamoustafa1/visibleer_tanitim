@@ -77,7 +77,8 @@ body { margin: 0; font-family: "Plus Jakarta Sans", Inter, system-ui, -apple-sys
 .mini-card ul { margin: 0; padding-left: 18px; color: var(--muted); }
 
 @media (max-width: 900px) {
-  .mini-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  /* Force 2 cols on tablets even if inline styles exist */
+  .mini-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
 }
 @media (max-width: 720px) {
   .mini-grid { grid-template-columns: 1fr; }
@@ -246,15 +247,16 @@ blockquote { margin: 0; padding: 14px; background: #ffffff08; border: 1px solid 
   .hero-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
-  /* Keep desktop-like header on mobile */
-  .nav-toggle { display: none; }
-  .nav { height: auto; padding: 6px 0; align-items: center; gap: 8px; }
+  /* Compact mobile header with hamburger */
+  .nav { position: relative; height: 56px; padding: 6px 0; align-items: center; gap: 8px; }
   .brand { font-size: 16px; }
   .site-header { background: #fff; }
-  .nav-links { position: static; display: flex; flex-wrap: wrap; gap: 8px; background: transparent; border: 0; padding: 0; }
-  .nav-links a { font-size: 12px; padding: 6px 8px; color: var(--fg); }
-  .nav-links a:hover { color: var(--brand-2); }
-  .nav-cta { padding: 6px 10px; font-size: 12px; }
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 36px; }
+  .nav-links { position: absolute; top: 52px; right: 16px; left: 16px; display: none; flex-direction: column; gap: 6px; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 8px; box-shadow: 0 14px 34px rgba(14,27,58,.12); }
+  .nav-links.show { display: flex; }
+  .nav-links a { font-size: 14px; padding: 10px 10px; color: var(--fg); }
+  .nav-links a:hover { color: var(--brand-2); background: #f7f9ff; }
+  .nav-cta { padding: 10px 12px; font-size: 14px; text-align: center; }
   /* Premium mobile typography */
   .cards { grid-template-columns: 1fr; }
   .hero h1 { font-size: 32px; letter-spacing: -0.4px; }
@@ -268,6 +270,8 @@ blockquote { margin: 0; padding: 14px; background: #ffffff08; border: 1px solid 
   .steps-grid { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }
   .feature-cards { grid-template-columns: 1fr; }
+  /* Force single column for all mini-grid sections on small phones */
+  .mini-grid { grid-template-columns: 1fr !important; }
   .btn { padding: 11px 16px; font-size: 14px; }
   body { zoom: 1 !important; transform: none !important; }
   /* Premium card polish on mobile */
